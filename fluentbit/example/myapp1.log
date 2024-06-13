@@ -1,0 +1,2 @@
+time=2023-06-12T14:32:00 level=info msg="User logged in" user_id=123
+time=2023-06-12T14:33:00 level=error msg="Failed to load page" page_id=456

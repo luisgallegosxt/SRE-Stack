@@ -1,0 +1,2 @@
+time:2023-06-12T14:34:00	level:info	msg:User logged out	user_id:789
+time:2023-06-12T14:35:00	level:warn	msg:Password attempt failed	user_id:101

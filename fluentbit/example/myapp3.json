@@ -1,0 +1,2 @@
+{"timestamp": "2023-06-12T14:36:00", "level": "info", "message": "Payment processed", "order_id": 102}
+{"timestamp": "2023-06-12T14:37:00", "level": "debug", "message": "Debugging information", "detail": "xyz"}
