@@ -54,54 +54,10 @@ If you are working in the cloud, the solution may be simpler since the main clou
 
 Generally, if you work on-premise, it is common to install these solutions in a container orchestrator such as kubernetes, but here we are going to keep it simple and install it directly on a Linux server.
 
-### Prometheus
-![Prometheus](assets/prometheus.png "Prometheus")
-
-Prometehus is a central processor of information from different sources. These sources are known as exporters or prometheus targets, since they are the ones that provide information to prometheus in a language that prometheus can read. The best known is `node_exporter`, which allows you to know the resources available and used in real time on a server, whether Linux or Windows.
-
-This information is stored by Prometheus, as a Time Series Database (TSDB). Prometheus then has the ability to provide this data to `Alert Manager` and `Grafana` for real-time viewing.
-
-Source: [Prometheus documentation](https://prometheus.io/docs/introduction/overview/)
-
-#### Install exporter
-First I recommend installing the explorer on each server that you need to monitor its metrics.
-[Node exporter](https://github.com/prometheus/node_exporter)
-These will be exposed on port 9100, for example `http://localhost:9100`
-
-Then a central monitoring server will read those metrics, store them, and then do custom processing, create dashboards with grafana and even generate alerts according to the rules that we have indicated.
-
-#### Install Prometheus
-
-We will install Prometheus directly on the system, without the use of docker or kubernetes.
-
-### Grafana
-Grafana is a data visualizer generally used for real-time monitoring metrics. It can read from different data sources and the most common are the TSDB with the PromQL language.
-
-Source: [Grafana](https://grafana.com/docs/grafana/latest/)
 
 
-## Fluentbit
-Fluent Bit is a very lightweight telemetry agent, it can capture logs, metrics and traces. Despite its different functionalities, I have only used it for logs.
 
-You need to create a configuration file once installed. This file should be called `fluent-bit.conf`, you can find it in the sourcebit section.
 
-For this example we are going to assume that we want to monitor the logs of 3 different applications and with different log generation formats. Additionally, we are going to export these logs to Prometheus.
 
-myapp1 -> logfmt
-myapp2 -> LTSV
-myapp3 -> JSON
-
-Execute
-```bash
-fluent-bit -c /path/to/your/fluent-bit.conf
-```
-
-Then in prometheus you need to configure a job in `prometheus.yml`
-
-*Access the metrics*
-1. Fluent Bit will export the metrics in `http://localhost:2021/metrics`.
-2. Prometheus will gather the metrics according to the `prometheus.yml` configuration.
-
-## Open Telemetry and Jaeger
 
 

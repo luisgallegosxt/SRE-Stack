@@ -1,0 +1,50 @@
+services:
+  nextjs:
+    build: ./nextjs
+    ports:
+      - "3000:3000"
+
+  flask:
+    build: ./flask
+    ports:
+      - "8000:8000"
+
+  fastapi:
+    build: ./fastapi
+    ports:
+      - "8001:8001"
+    depends_on:
+      - db
+
+  db:
+    image: postgres:latest
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: mydatabase
+    ports:
+      - "5432:5432"
+
+  go:
+    build: ./go
+    ports:
+      - "8002:8002"
+
+  # rust:
+  #   build: ./rust
+  #   ports:
+  #     - "8003:8003"
+
+  cpp:
+    build: ./cpp
+    ports:
+      - "8004:8004"
+
+  otel-collector:
+    image: otel/opentelemetry-collector:latest
+    command: ["--config=/etc/otel-collector-config.yaml"]
+    volumes:
+      - ./otel-collector-config.yaml:/etc/otel-collector-config.yaml
+    ports:
+      - "4317:4317" # gRPC receiver
+      - "55680:55680" # HTTP receiver

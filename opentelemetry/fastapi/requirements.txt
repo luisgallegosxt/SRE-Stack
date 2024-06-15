@@ -1,0 +1,7 @@
+fastapi
+uvicorn
+sqlalchemy
+psycopg2-binary
+opentelemetry-api
+opentelemetry-sdk
+opentelemetry-instrumentation-fastapi
